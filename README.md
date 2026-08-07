@@ -1,6 +1,8 @@
 # Cinematica Diretta: Robot 3DOF
 
 Implementazione del modello cinematico per un manipolatore seriale 3DOF, calcolata senza l'ausilio di librerie robotiche dedicate.
+![Modello cinematico del robot 3DOF](image.png)
+
 
 ## 1. Definizione dei Reference Frame
 *   **Base (Frame 0):** Asse Z verticale verso l'alto, Asse X frontale, Asse Y laterale.
