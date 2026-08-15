@@ -43,7 +43,10 @@ def extract_rpy(T):
     """
     Estrae gli angoli Roll, Pitch e Yaw (convenzione XYZ) dalla matrice omogenea.
     """
-    sy = np.sqrt(T[0,0]**2 + T[1,0]**2)
+    #Fatta da Gemini
+    #sy = np.sqrt(T[0,0]**2 + T[1,0]**2)
+
+    sy = np.sqrt(T[2,1]**2 + T[2,2]**2) # fatta da Tommi
     singular = sy < 1e-6
 
     if not singular:
