@@ -4,11 +4,13 @@ Implementazione del modello cinematico per un manipolatore seriale 3DOF, calcola
 ![Modello cinematico del robot 3DOF](image.png)
 
 
-## 1. Definizione dei Reference Frame
-*   **Base (Frame 0):** Asse Z verticale verso l'alto, Asse X frontale, Asse Y laterale.
-*   **Joint 1 (Base):** Rotazione attorno all'asse Z0. Il Frame 1 è traslato di `d1 = 0.30 m` lungo Z0.
-*   **Joint 2 (Spalla):** Rotazione attorno all'asse Y1. Il Frame 2 è traslato di `a2 = 0.25 m` lungo X1.
-*   **Joint 3 (Gomito):** Rotazione attorno all'asse Y2. L'End-Effector è traslato di `a3 = 0.15 m` lungo X2.
+## 1. Definizione dei Reference Frame (Convenzione Denavit-Hartenberg)
+Il modello è stato implementato seguendo rigorosamente la convenzione di Denavit-Hartenberg (D-H) come illustrato nello schema del manipolatore. Tutte le posizioni articolari generano rotazioni **esclusivamente attorno all'asse Z** del proprio frame di riferimento locale.
+
+*   **Base (Frame 0):** L'asse $Z_0$ è verticale e punta verso l'alto.
+*   **Joint 1 (Base):** Traslazione di $d_1 = 0.30\text{ m}$ lungo $Z_0$ e rotazione di $\theta_1 = q_1$ attorno a $Z_0$. Viene applicato un *twist* cinematico di $-pi/2$ attorno all'asse $X_1$ affinché il nuovo asse di rotazione $Z_1$ sia ortogonale (allineato orizzontalmente), coerentemente con lo schema.
+*   **Joint 2 (Spalla):** Rotazione $\theta_2 = q_2$ attorno all'asse $Z_1$. Il Frame 2 è traslato della lunghezza del braccio $a_2 = 0.25\text{ m}$ lungo l'asse $X_1$.
+*   **Joint 3 (Gomito):** Rotazione $\theta_3 = q_3$ attorno all'asse $Z_2$. L'End-Effector è traslato della lunghezza dell'avambraccio $a_3 = 0.15\text{ m}$ lungo l'asse $X_2$.
 
 ## 2. Convenzione per le rotazioni
 I valori di output per l'orientamento finale seguono la convenzione degli angoli di Eulero (Roll, Pitch, Yaw) di tipo XYZ intrinseco. 
