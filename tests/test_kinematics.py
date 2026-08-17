@@ -1,10 +1,10 @@
 import numpy as np
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))) # importa la classe Robot3DOF dalla cartella src.
 from src.robot_model import Robot3DOF
 
-def test_home_position():
+def test_home_position(): #testa la configurazione a "riposo" del robot, ovvero quando tutti i motori sono fermi a 0 radianti.
     robot = Robot3DOF(d1=0.30, a2=0.25, a3=0.15)
     res = robot.forward_kinematics([0, 0, 0])
     

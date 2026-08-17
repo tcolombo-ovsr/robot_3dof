@@ -39,23 +39,27 @@ def translation(x, y, z):
         [0, 0, 0, 1]
     ])
 
+
 def extract_rpy(T):
     """
-    Estrae gli angoli Roll, Pitch e Yaw (convenzione XYZ) dalla matrice omogenea.
+    Estrae gli angoli Roll, Pitch e Yaw dalla matrice omogenea T.
     """
-    #Fatta da Gemini
-    #sy = np.sqrt(T[0,0]**2 + T[1,0]**2)
+    sy = np.sqrt(T[2, 1] ** 2 + T[2, 2] ** 2)
 
-    sy = np.sqrt(T[2,1]**2 + T[2,2]**2) # fatta da Tommi
-    singular = sy < 1e-6
+    singular = sy < 1e-6 #numero molto piccolo
 
     if not singular:
-        roll = np.arctan2(T[2,1], T[2,2])
-        pitch = np.arctan2(-T[2,0], sy)
-        yaw = np.arctan2(T[1,0], T[0,0])
+        # Soluzione normale per theta in (-pi/2, pi/2)
+        roll_phi = np.arctan2(T[1, 0], T[0, 0])
+        pitch_theta = np.arctan2(-T[2, 0], sy)
+        yaw_psi = np.arctan2(T[2, 1], T[2, 2])
     else:
-        roll = np.arctan2(-T[1,2], T[1,1])
-        pitch = np.arctan2(-T[2,0], sy)
-        yaw = 0
+        # Singolarità: c_theta = 0.
+        # Fissiamo arbitrariamente yaw (psi) a 0.
+        yaw_psi = 0.0
+        pitch_theta = np.arctan2(-T[2, 0], sy)  # Sarà +pi/2 o -pi/2
 
-    return np.array([roll, pitch, yaw])
+        # Con psi=0 e theta=pi/2, calcoliamo phi da -r12 e r22
+        roll_phi = np.arctan2(-T[0, 1], T[1, 1])
+
+    return np.array([roll_phi, pitch_theta, yaw_psi])
