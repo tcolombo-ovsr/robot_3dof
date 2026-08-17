@@ -1,6 +1,6 @@
 # Cinematica Diretta: Robot 3DOF
 
-Implementazione del modello cinematico per un manipolatore seriale 3DOF, calcolata senza l'ausilio di librerie robotiche dedicate.
+Implementazione del modello cinematico per un manipolatore seriale 3DOF
 ![Modello cinematico del robot 3DOF](image.png)
 
 
