@@ -14,10 +14,10 @@ def run_examples():
     print(f"Position (x,y,z): {np.round(res_1['position'], 4)}")
     print(f"Orientation (roll, pitch, yaw): {np.round(res_1['orientation_rpy'], 4)}")
 
-    print("\n=== ESEMPIO 2: Rotazione base di 90° (q = [pi/2, 0, 0]) ===")
+    print("\n=== ESEMPIO 2: Rotazione base di pi/2 (q = [pi/2, 0, 0]) ===")
     res_2 = robot.forward_kinematics([np.pi/2, 0.0, 0.0], verbose=True)
-    print(f"Position (x,y,z): {np.round(res_2['position'], 4)}")
-    print(f"Orientation (roll, pitch, yaw): {np.round(res_2['orientation_rpy'], 4)}")
+    print(f"Position [m] (x,y,z): {np.round(res_2['position'], 4)}")
+    print(f"Orientation [rad] (roll, pitch, yaw): {np.round(res_2['orientation_rpy'], 4)}")
 
 if __name__ == "__main__":
     run_examples()
